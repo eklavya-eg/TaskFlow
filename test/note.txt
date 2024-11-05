@@ -1,0 +1,95 @@
+npm create vite@latest my-project -- --template react
+cd my-project
+
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+export default function App() {
+  return (
+    <h1 className="text-3xl font-bold underline">
+      Hello world!
+    </h1>
+  )
+}
+
+
+
+
+
+
+
+
+import { useState , lazy} from 'react'
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom"
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+const Dashboard = lazy(()=>import("./components/Dashboard"))
+const Landing = lazy(()=>import("./components/Landing"))
+
+function App() {
+  const [count, setCount] = useState(0)
+
+
+
+  return (
+    <>
+      <div>
+        <BrowserRouter>
+          <AppBar/>
+          <Routes>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Landing />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
+    </>
+  )
+}
+
+function AppBar() {
+  const navigate = useNavigate()
+  return (<div>
+    {/* <button onClick={()=>{
+          window.location.href="/"
+        }}>home</button> */}
+    <button onClick={() => {
+      navigate("/")
+    }}>home</button>
+    <button onClick={() => {
+      navigate("/dashboard")
+    }}>dashboard</button>
+  </div>)
+
+}
+
+
+export default App
+
+
+
+font-thin: Thin (100)
+font-extralight: Extra Light (200)
+font-light: Light (300)
+font-normal: Normal (400)
+font-medium: Medium (500)
+font-semibold: Semi Bold (600)
+font-bold: Bold (700)
+font-extrabold: Extra Bold (800)
+font-black: Black (900)
